@@ -7,3 +7,4 @@ description = "Core library for the plz package manager"
 [dependencies]
 serde = { workspace = true }
 serde_yaml = { workspace = true }
+colored = { workspace = true }
