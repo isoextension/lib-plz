@@ -1,7 +1,8 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
+use std::process::Command;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Package {
@@ -15,7 +16,8 @@ pub struct Package {
     pub conflicts: Vec<String>,
     pub replaces: Vec<String>,
     pub architecture: String,
-    pub size: u64,
+    pub download_url: Option<String>,
+    pub package_file: Option<String>,
     pub installed: bool,
 }
 
@@ -160,7 +162,6 @@ impl PlzManager {
                 println!("No download URL provided, attempting to get from system...");
                 
                 // Try copying from pacman cache first
-                let pacman_cache = format!("/var/cache/pacman/pkg/{}-{}-*.pkg.tar.xz", package.name, package.version);
                 let mut found_package = false;
                 
                 // Look for package in pacman cache
