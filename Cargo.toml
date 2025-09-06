@@ -2,6 +2,10 @@
 name = "lib-plz"
 version = "0.1.0"
 edition = "2024"
+description = "Core library for the plz package manager"
 
 [dependencies]
+alpm = { workspace = true }
+serde = { workspace = true }
 serde_yaml = "0.9.34"
+colored = { workspace = true }
